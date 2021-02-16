@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.bit.ex.mapper.EmpMapper">
+
+	<select id="getList" resultType="edu.bit.ex.vo.EmpVO">
+	<![CDATA[ 
+		select * from emp
+	]]>
+	</select>
+	
+	<insert id="insertEmp">
+	<![CDATA[
+		insert into emp (empno, ename, job, mgr, hiredate, sal, comm, deptno)
+		values (#{empno}, #{ename}, #{job}, #{mgr}, #{hiredate}, #{sal}, #{comm}, #{deptno}
+	]]>
+	</insert>
+	
+	<select id="getListWithPaging" resultType="edu.bit.ex.vo.EmpVO">
+	<![CDATA[
+		select * from (
+			select rownum rn, a.*
+			from (
+				select * from emp order by hiredate desc
+			) a where rownum <= #{pageNum} * #{amount}
+		) where rn > (#{pageNum}-1) * #{amount}		
+	]]>
+	</select>
+	
+	<select id="getTotalCount" resultType="int">
+		<![CDATA[
+			select count(*) from emp
+		]]>
+	</select>
+	
+	<update id="update">
+	<![CDATA[
+		update emp set deptno = 20 where deptno = 10
+	]]>
+	</update>
+	
+	<select id="deptList" resultType="edu.bit.ex.vo.EmpVO">
+		<![CDATA[
+			select * from emp where deptno = #{deptno}
+		]]>
+	</select>
+</mapper>
