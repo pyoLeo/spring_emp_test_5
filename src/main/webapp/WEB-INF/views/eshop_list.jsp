@@ -43,7 +43,30 @@
 <link rel="apple-touch-icon-precomposed"
 	href="${pageContext.request.contextPath}/resources/eshopper/images/ico/apple-touch-icon-57-precomposed.png">
 </head><!--/head-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
 
+	$(document).ready(function() {
+		var imgArray = new Array();
+
+		imgArray[0] = "product7.jpg"
+		imgArray[1] = "product8.jpg"
+		imgArray[2] = "product9.jpg"
+		imgArray[3] = "product10.jpg"
+		imgArray[4] = "product11.jpg"
+		imgArray[5] = "product12.jpg"
+
+		var objImg = document.getElementsByClassName("showImg");
+		
+		for (var i = 0; i < objImg.length; i++) {
+			var imgNum = Math.round(Math.random() * 5);
+			// ${pageContext.request.contextPath}/resources/eshopper/images/shop/
+			var src = objImg[i].src;
+			//objImg[i].src = src + imgArray[imgNum];
+			objImg[i].src += imgArray[imgNum];
+		}
+	});
+</script>
 <body>
 	<header id="header"><!--header-->
 		<div class="header_top"><!--header_top-->
@@ -380,7 +403,7 @@
 						<div class="product-image-wrapper">
 							<div class="single-products">
 								<div class="productinfo text-center">
-									<img src="${pageContext.request.contextPath}/resources/eshopper/images/shop/product11.jpg" alt="" />
+									<img class="showImg" src="${pageContext.request.contextPath}/resources/eshopper/images/shop/" alt="" />
 									<h2>${list.empno}</h2>
 									<p>${list.ename}</p>
 									<p>${list.deptno}</p>

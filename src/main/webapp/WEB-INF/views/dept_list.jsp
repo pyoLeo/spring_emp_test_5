@@ -44,23 +44,31 @@
 	href="${pageContext.request.contextPath}/resources/eshopper/images/ico/apple-touch-icon-57-precomposed.png">
 </head><!--/head-->
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 
-var img = new Array();
-	img[0] = "src='${pageContext.request.contextPath}/resources/eshopper/images/shop/product7.jpg' alt='' ";
-	img[1] = "src='${pageContext.request.contextPath}/resources/eshopper/images/shop/product8.jpg' alt='' ";
-	img[2] = "src='${pageContext.request.contextPath}/resources/eshopper/images/shop/product9.jpg' alt='' ";
-	img[3] = "src='${pageContext.request.contextPath}/resources/eshopper/images/shop/product10.jpg' alt='' ";
-	img[4] = "src='${pageContext.request.contextPath}/resources/eshopper/images/shop/product11.jpg' alt='' ";
-	img[5] = "src='${pageContext.request.contextPath}/resources/eshopper/images/shop/product12.jpg' alt='' ";
+	$(document).ready(function() {
+		var imgArray = new Array();
 
-function imgs() {
-	var num = Math.round(Math.random()*img.length);
-	var objImg = document.getElementById("shop_img");
-	objImg = img[num];
-}
+		imgArray[0] = "product7.jpg"
+		imgArray[1] = "product8.jpg"
+		imgArray[2] = "product9.jpg"
+		imgArray[3] = "product10.jpg"
+		imgArray[4] = "product11.jpg"
+		imgArray[5] = "product12.jpg"
+
+		var objImg = document.getElementsByClassName("showImg");
+		
+		for (var i = 0; i < objImg.length; i++) {
+			var imgNum = Math.round(Math.random() * 5);
+			// ${pageContext.request.contextPath}/resources/eshopper/images/shop/
+			var src = objImg[i].src;
+			//objImg[i].src = src + imgArray[imgNum];
+			objImg[i].src += imgArray[imgNum];
+		}
+	});
 </script>
-<body onload="imgs()">
+<body>
 	<header id="header"><!--header-->
 		<div class="header_top"><!--header_top-->
 			<div class="container">
@@ -337,7 +345,7 @@ function imgs() {
 						<div class="product-image-wrapper">
 							<div class="single-products">
 								<div class="productinfo text-center">
-									<img id="shop_img"/>
+									<img class="showImg" src="${pageContext.request.contextPath}/resources/eshopper/images/shop/" alt="" />
 									<h2>${list.empno}</h2>
 									<p>${list.ename}</p>
 									<p>${list.deptno}</p>
